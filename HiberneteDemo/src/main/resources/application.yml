@@ -1,0 +1,22 @@
+#spring.application.name=HiberneteDemo
+
+spring:
+  datasource:
+    url: jdbc:h2:file:~/appdb
+    # url: jdbc:h2:mem:appdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+
+    show-sql: true
+

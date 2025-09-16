@@ -1,0 +1,54 @@
+package com.Hibernate.HiberneteDemo.Service;
+
+import com.Hibernate.HiberneteDemo.Repository.UserRepository;
+import com.Hibernate.HiberneteDemo.Runner.DataLoader;
+import com.Hibernate.HiberneteDemo.UserEntity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
+import java.util.Optional;
+
+@Component
+public class UserService {
+    @Autowired
+    UserRepository userRepository;
+
+    public void insertSampleData() {
+        User u1 = new User(null, "MANDIP", "USER@GMAIL.COM", "1234567");
+        User u2 = new User(null, "ALICE", "ALICE@GMAIL.COM", "9876543");
+        userRepository.save(u1);
+        userRepository.save(u2);
+
+    }
+
+    // to find list of all Users from database
+    public List<User> getUserData()
+    {
+        List<User> userList = userRepository.findAll();
+        return userList;
+    }
+
+    //to find users by specific id
+    public Optional<User> findUserById(long id)
+    {
+        Optional<User> user = userRepository.findById(id);
+        return user;
+    }
+
+    // to create a new data
+
+    public User createNewUser(User user)
+    {
+        User save1 = userRepository.save(user);
+        return save1;
+    }
+    // to find by name
+//    public List<User> nameUser(String name)
+//    {
+//        List <User> userList1 = userRepository.findAll(name);
+//        return userList1;
+//    }
+
+}
