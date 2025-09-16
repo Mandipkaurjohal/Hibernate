@@ -44,11 +44,14 @@ public class UserService {
         User save1 = userRepository.save(user);
         return save1;
     }
-    // to find by name
-//    public List<User> nameUser(String name)
-//    {
-//        List <User> userList1 = userRepository.findAll(name);
-//        return userList1;
-//    }
 
+public User update(User user)
+    {
+        Optional<User> optionalUser = userRepository.findById(user.getId());
+    if(optionalUser.isPresent())
+    {
+        return userRepository.save(user);
+    }
+        return user;
+    }
 }
