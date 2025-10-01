@@ -1,16 +1,18 @@
 package com.Hibernate.HiberneteDemo.Controller;
 
-import com.Hibernate.HiberneteDemo.Repository.UserRepository;
+import com.Hibernate.HiberneteDemo.DTO.UserDTO;
 import com.Hibernate.HiberneteDemo.Service.UserService;
 import com.Hibernate.HiberneteDemo.UserEntity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-
+@Component
 @RestController
 @RequestMapping(value = "/users",produces = MediaType.APPLICATION_JSON_VALUE)
 
@@ -60,11 +62,30 @@ public class UserController1 {
 //}
 
 
+// create data using ResponseEntity
+
 @PostMapping("/create" )
-    public User createNewUser(@RequestBody User user)
+    public ResponseEntity<User> createNewUser(@RequestBody User user)
     {
-      return userService.createNewUser(user);
+        User newUser = userService.createNewUser(user);
+        ResponseEntity<User> userResponseEntity = ResponseEntity.status(HttpStatusCode.valueOf(201))
+                .header("Action", "Created")
+                .header("GenId", String.valueOf(user.getId()))
+                .header("status",String.valueOf(1100))
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(user);
+        return userResponseEntity;
 
     }
+
+    // TO FIND LASTNAME OF BY ENTERING FIRST NAME
+
+    @PostMapping("/find")
+    public List<String> getLastName(@RequestBody UserDTO userDTO)
+    {
+return  userService.getLastName(userDTO.getName());
+    }
+
+
 
 }
