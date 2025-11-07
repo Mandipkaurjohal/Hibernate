@@ -2,7 +2,7 @@ package com.Hibernate.HiberneteDemo.Controller;
 
 import com.Hibernate.HiberneteDemo.DTO.UserDTO;
 import com.Hibernate.HiberneteDemo.Service.UserService;
-import com.Hibernate.HiberneteDemo.UserEntity.User;
+import com.Hibernate.HiberneteDemo.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;

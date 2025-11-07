@@ -1,7 +1,9 @@
 package com.Hibernate.HiberneteDemo.Service;
 
+import com.Hibernate.HiberneteDemo.Entity.Phone;
+import com.Hibernate.HiberneteDemo.Repository.PhoneRepo;
 import com.Hibernate.HiberneteDemo.Repository.UserRepository;
-import com.Hibernate.HiberneteDemo.UserEntity.User;
+import com.Hibernate.HiberneteDemo.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PhoneRepo phoneRepo;
 
     public void insertSampleData() {
         User u1 = new User(null, "MANDIP", "kaur", "USER@GMAIL.COM", "1234567");
@@ -36,6 +40,9 @@ public class UserService {
     // to create a new data
 
     public User createNewUser(User user) {
+
+        Phone savePhone = phoneRepo.save(user.getPhone());
+        user.setPhone(savePhone);
         User save1 = userRepository.save(user);
         return save1;
     }

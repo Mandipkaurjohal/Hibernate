@@ -1,9 +1,6 @@
-package com.Hibernate.HiberneteDemo.UserEntity;
+package com.Hibernate.HiberneteDemo.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.stereotype.Component;
-
 
 
 @Entity // to tell hibernete to create table in database
@@ -22,6 +19,10 @@ public class User {
 
     private     String email;
     private String phoneNumber;
+
+    // this is realationship of one to one means Phone class one coloum is connected with Student class os data
+     @OneToOne
+    private Phone phone;
     public User() {
     }
 
@@ -71,6 +72,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 
     @Override
